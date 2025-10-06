@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Authentication</title>
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #a18cd1, #6027b0);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      width: 320px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #6027b0;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a18cd1;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter your email">
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password">
+
+      <button type="submit">Login</button>
+      <p id="message"></p>
+    </form>
+  </div>
+
+  <script>
+    
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form refresh
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const message = document.getElementById("message");
+
+      
+      if (email === "" || password === "") {
+        message.textContent = "All fields are required!";
+        message.className = "error";
+        return;
+      }
+
+      
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        message.textContent = "Please enter a valid email address!";
+        message.className = "error";
+        return;
+      }
+
+      
+      if (password.length < 6) {
+        message.textContent = "Password must be at least 6 characters!";
+        message.className = "error";
+        return;
+      }
+
+      
+      const validEmail = "user@example.com";
+      const validPassword = "123456";
+
+      if (email === validEmail && password === validPassword) {
+        message.textContent = "Login successful! Redirecting...";
+        message.className = "success";
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1500);
+      } else {
+        message.textContent = "Invalid email or password!";
+        message.className = "error";
+      }
+    });
+  </script>
+</body>
+</html>
